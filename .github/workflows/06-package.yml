@@ -7,12 +7,16 @@ jobs:
   package:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: src/CompoSecureApp/CompoSecureApp
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "10.0.x"
 
       - run: dotnet publish -c Release -o publish
 
@@ -21,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: application-package
-          path: application.tar.gz
+          path: src/CompoSecureApp/CompoSecureApp/application.tar.gz
