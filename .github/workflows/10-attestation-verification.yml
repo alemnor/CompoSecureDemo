@@ -1,0 +1,22 @@
+name: 10 - Verify Provenance
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: application-package
+
+      - name: Verify Attestation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh attestation verify application.tar.gz --repo ${{ github.repository }}

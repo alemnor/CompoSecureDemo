@@ -1,0 +1,30 @@
+name: 09 - Build Attestation
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          mkdir publish
+          echo "hello" > publish/app.txt
+          tar -czf application.tar.gz publish/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: application-package
+          path: application.tar.gz
+
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: application.tar.gz

@@ -1,0 +1,16 @@
+name: 07 - Environment Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+      - run: echo "Waiting for Environment Approval"

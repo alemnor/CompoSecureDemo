@@ -1,0 +1,12 @@
+name: 01 - Hello World
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hello
+        run: echo "Building Application"
